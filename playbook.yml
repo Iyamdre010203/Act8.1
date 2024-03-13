@@ -1,0 +1,19 @@
+---
+
+- name: Extract Executable form PCAP
+  hosts: ubuntu
+  become: yes
+  tasks:
+
+  - name: Copy PCAP to Control Node
+    fetch:
+      src: /home/dump.pcap
+      dest: /home/Act8.1/pcap_file/
+      flat:
+    register: fetch
+
+  - name: Extract Executable from PCAP
+    script: "/home/Act8.1/"
+    args:
+      pcap_file: "/home/diones_8.1/pcap_file/dump.pcap"
+      output_directory: "/home/diones_8.1/pcap_file/extracted/"
